@@ -15,6 +15,7 @@ end
 
 
 def apply_coupons(cart, coupons)
+<<<<<<< HEAD
 =begin
   newhash = {}
   cart.each do |item, hash|
@@ -28,10 +29,29 @@ def apply_coupons(cart, coupons)
         newhash[newitem][:price] = clip[:cost] / clip[:num]
         newhash[newitem][:clearance] = hash[:clearance]
         newhash[newitem][:count] = ocount - newhash[item][:count]
+=======
+  newhash = {}
+  cart.each do |item, hash|
+    coupons.each do |clip|
+      if item == clip[:item]
+        if hash[:count] >= clip[:num]
+          newitem = item + "W/COUPON"
+          newhash[item] = hash
+          newhash[item][:count] = hash[:count] % clip[:num]
+          newhash[newitem][:price] = clip[:cost] / clip[:num]
+          newhash[newitem][:clearence] = hash[:clearance]
+          newhash[newitem][:count] = hash[:count] - newhash[item][:count]
+        else 
+          newhash[item] = hash
+        end 
+      else 
+        newhash[item] = hash
+>>>>>>> 4b86b29e2a28316459c3b60eca5f58ffa0e7b1ec
       end
     end
   end 
   newhash
+<<<<<<< HEAD
 end 
 =end 
   cart.reduce({}) do |memo, (key, value)|
@@ -49,6 +69,8 @@ end
     end
     memo
   end 
+=======
+>>>>>>> 4b86b29e2a28316459c3b60eca5f58ffa0e7b1ec
 end
 
 def apply_clearance(cart)
